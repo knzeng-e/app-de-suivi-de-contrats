@@ -1,1 +1,3 @@
-Application de suivi de contrats
+Application de suivi de contrats:
+
+React + Redux + Firebase
