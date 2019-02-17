@@ -4,13 +4,13 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { firestore } from 'firebase';
 import { Redirect } from 'react-router-dom';
-
+import moment from 'moment';
 
 function ContractDetails(props) {
 console.log('Firestore : ', firestore)
   //const id = props.match.params.id;
   const { contract, auth } = props;
-  console.log(props)
+  //const current_time = moment(contract.createdAt.toDate()).calendar();
   
   if (contract) {
 
@@ -22,7 +22,7 @@ console.log('Firestore : ', firestore)
         <p>{contract.content}</p>
         <div className = "card-action grey lighten-4 grey-text">
         <div>Enregistré par {contract.authorFistName} {contract.authorLastName}</div>
-        <div>26 février 2019, 4:42 AM</div>
+        <div>{moment(contract.createdAt.toDate()).calendar()}</div>
         </div>
       </div>
     </div>

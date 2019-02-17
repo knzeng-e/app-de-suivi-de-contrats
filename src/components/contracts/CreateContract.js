@@ -21,7 +21,8 @@ class CreateContract extends Component {
 
     handleSubmit = (e) => {
       e.preventDefault();
-      this.props.createContract(this.state)
+      this.props.createContract(this.state);
+      this.props.history.push('/');
     }
   render() {
     const { auth } = this.props;

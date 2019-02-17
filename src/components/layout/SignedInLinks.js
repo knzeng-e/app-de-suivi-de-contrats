@@ -11,14 +11,14 @@ const SignedInLinks = (props) => {
         <ul className = "right">
             <li><NavLink to = '/create'>Nouveau contrat</NavLink></li>
             <li><a onClick = {props.signOut}>Déconnexion</a></li>
-            <li><NavLink to = '/' className = 'btn btn-floating green lighten-2'>MEVA</NavLink></li>
+            <li><NavLink to = '/' className = 'btn btn-floating green lighten-2'>{initials}</NavLink></li>
         </ul>
     );
 }
 
 const mapStateToProps = (state) => {
     return {
-        initials : state.firebase.auth
+        initials : state.firebase.profile.initals
     }
 }
 
