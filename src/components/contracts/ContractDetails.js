@@ -18,9 +18,10 @@ console.log('Firestore : ', firestore)
     return (
     <div className = "container section contract-details">
       <div className = "card-content">
-        <span className = "card-title">{contract.title}</span>
+        <span className = "card-title" ><h2>{contract.title}</h2></span>
         <p>{contract.content}</p>
         <div className = "card-action grey lighten-4 grey-text">
+        <div>Fin de validité : {contract.validity}</div>
         <div>Enregistré par {contract.authorFistName} {contract.authorLastName}</div>
         <div>{moment(contract.createdAt.toDate()).calendar()}</div>
         </div>
