@@ -2,6 +2,9 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const nodemailer = require('nodemailer');
 
+const SENDER_EMAIL = '' //Email of th sender here;
+const SENDER_PASSWORD = '' //Password of th sender here;
+
 admin.initializeApp(functions.config().firebase);
 
 const transporter = nodemailer.createTransport({
@@ -9,8 +12,8 @@ const transporter = nodemailer.createTransport({
     port: 25,
     secure: false,
     auth : {
-        user: 'SENDER_EMAIL',
-        pass: 'SENDER_PASSWORD'
+        user: SENDER_EMAIL,
+        pass: SENDER_PASSWORD
     },
     tls: {
         rejectUnauthorized: false
@@ -18,7 +21,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const mailOptions = {
-    from : '"Coucouya via Sage_Papel" <thot.nzeng@gmail.com>',
+    from : '"Coucouya via Contrats_Papel" <thot.nzeng@gmail.com>',
     to: 'kevin.nzeng@gmail.com',
     subject : '',
     text: '',
@@ -73,6 +76,7 @@ const checkValidity = (contract) => {
                  console.log('Le contrat ', contract.data().title, 'arrive a expiration today')
                  //Envoi du mail end_of_contract
                  end_of_contract(mailOptions, contract.data());
+                 updateColorStatus(contract, 'black');
             }
         }
     } else if (parseInt(currentTime[0]) === parseInt(remind_once[1])){
@@ -81,6 +85,7 @@ const checkValidity = (contract) => {
                      console.log('Le contrat ', contract.data().title, 'arrive a expiration dans 6 mois');
                      //Envoi du mail six_months_notifier
                      six_months_notifier(mailOptions, contract.data());
+                     updateColorStatus(contract, 'orange');
                 }
             }
         }
@@ -91,6 +96,7 @@ const checkValidity = (contract) => {
                          console.log('Le contrat ', contract.data().title, 'arrive a expiration dans 3 mois')
                          //Envoi du mail three_months_reminder
                          three_months_notifier(mailOptions, contract.data());
+                         updateColorStatus(contract, 'red');
                     }
                 }
             }
@@ -104,15 +110,11 @@ exports.sendEmailWatcher = functions.https.onRequest((request, response) => {
              docs.forEach(doc => {
                  checkValidity(doc);
                 })
-                response.send("OK");
+                response.send("OK Tracker");
         }).catch((err) => {
             console.log ('Something went badly wrong: ', err)
         })
     
-});
-
-exports.helloWorld = functions.https.onRequest((request, response) => {
-    response.send("Dieu n'est pas Koudou.. Mbolo!!");
 });
 
 const createNotification = ((notification) => {
@@ -120,6 +122,13 @@ const createNotification = ((notification) => {
         console.log('Notfification added: ', doc)
     })
 })
+
+const updateColorStatus = ((contract, color) => {
+    console.log (contract.id);
+    const docId = contract.id;
+    admin.firestore().collection('contracts').doc(docId).update({colorStatus: color});
+    console.log(color);
+});
 
 exports.contractCreated = functions.firestore
     .document('contracts/{contractId}')

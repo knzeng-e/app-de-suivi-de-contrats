@@ -1,6 +1,5 @@
 import React from 'react';
 import ContractSummary from './ContractSummary';
-import { Link } from 'react-router-dom';
 
 const ContractList = ({contracts}) => {
     return (
@@ -8,9 +7,11 @@ const ContractList = ({contracts}) => {
             {
                 contracts && contracts.map(contract => {
                     return (
-                        <Link to = {'/contract/' +  contract.id} key = {contract.id}>
-                            <ContractSummary contract = {contract} />
-                        </Link>
+                            <ContractSummary 
+                                contract = {contract}
+                                contract_id = {contract.id}
+                                key = {contract.id}/>
+                       
                     );
                     
                 })

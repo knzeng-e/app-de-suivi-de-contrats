@@ -12,7 +12,8 @@ class CreateContract extends Component {
         validity: '',
         endDate: '',
         firstNotif: '',
-        secondNotif: ''
+        secondNotif: '',
+        colorStatus: 'green'
 
     }
 
@@ -56,28 +57,31 @@ class CreateContract extends Component {
     if (!auth.uid) return <Redirect to = '/signin' />;
     return (
       <div className = "container">
-        <form onSubmit = {this.handleSubmit} className = "white">
-            <h5 className = "grey-text text-darken-3">Création d'un contrat</h5>
-            <div className = "input-field">
+      <div className="card col s12">
+        <form onSubmit = {this.handleSubmit} className = "card-content grey lighten-4 white z-depth-4">
+            <h5 className = "card-title grey darken-3 white-text center-align z-depth-2">Création d'un contrat</h5>
+            <br/>
+            <div className = "input-field grey-text z-depth-0 center">
                 <label htmlFor = "title">Nom du contract</label>
                 <input required type="text" id = "title" onChange = {this.handleChange}/>
             </div>
-
-            <div className = "input-field">
+            <div className = "input-field grey-text z-depth-0 center">
                 <label htmlFor = "content">Descriptif du contrat</label>
                 <textarea required className = "materialize-textarea" id = "content" onChange = {this.handleChange}></textarea>
             </div>
-
             <div >
-              <span>Date de fin de validité : </span>
-                <DatePicker required id = "validity" onChange = {this.handleDate} 
-                      value = {this.state.endDate} minDate = {new Date()}/>
-            </div>
-            <div className = "input-field">
-                <button className = "btn red lighten-1 z-depth-0">Créer le contrat</button>
+              <br/>
+              
+              <div>
+                <span className = "input-field">Date de fin de validité : 
+                  <DatePicker required id = "validity" onChange = {this.handleDate}
+                      value = {this.state.endDate} minDate = {new Date()}/></span>
+                      <button className = "btn red lighten-1 z-depth-0 right">Créer le contrat</button>
+                      </div>
+                
             </div>
         </form>
-        
+        </div>
       </div>
     )
   }
