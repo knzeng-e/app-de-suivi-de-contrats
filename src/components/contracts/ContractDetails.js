@@ -1,17 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
+import { deleteContract } from '../../store/actions/contractActions';
 import { compose } from 'redux';
 import { firestore } from 'firebase';
 import { Redirect } from 'react-router-dom';
 import moment from 'moment';
 
 function ContractDetails(props) {
-console.log('Firestore : ', firestore)
+console.log('params : ', props.match.params)
   //const id = props.match.params.id;
-  const { contract, auth } = props;
+  const { contract, auth, deleteContract, id } = props;
   //const current_time = moment(contract.createdAt.toDate()).calendar();
-  
+
   if (contract) {
 
     if  (!auth.uid) return <Redirect to = '/signin' />
@@ -21,16 +22,20 @@ console.log('Firestore : ', firestore)
       <div className="col s12">
         <div className="card darken-1">
           <div className="card-content  darken-4 z-depth-4">
-          <span className = "card-title grey darken-3 white-text center-align z-depth-2" >{contract.title}</span>
+          <span className = "card-title grey darken-3 white-text center-align z-depth-2">{contract.title}</span>
           <br/>
           <blockquote>{contract.content}</blockquote>
           </div>
           <div className = "card-action grey lighten-4 grey-text z-depth-4 center">
             <div>Fin de validité : {contract.validity}</div>
-            <span>
-            <button className = "btn left" href="#"><i className="material-icons">mode_edit</i></button>
-            <button className = "btn right red lighten-1"><i className="material-icons">delete</i></button>
-            </span>
+            
+          <span>
+           <button className = "btn left" href="#"><i className="material-icons">mode_edit</i></button>
+           <button className = "btn right red lighten-1" onClick={() => deleteContract(id)}><i className="material-icons">delete</i></button>
+          </span>
+
+
+
             <div>Enregistré par {contract.authorFistName} {contract.authorLastName}</div>
             <div>{moment(contract.createdAt.toDate()).calendar()}</div>
             
@@ -55,15 +60,21 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     contract : contract,
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    id: id
 
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteContract : (id) => dispatch(deleteContract(id))
+  }
+}
+
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect([
     { collection: 'contracts' }
   ])
 )(ContractDetails);
- 

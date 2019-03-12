@@ -8,7 +8,7 @@ const Navbar = (props) => {
     const { auth } = props;
    const links = auth.uid ? <SignedInLinks /> : <SignedOutLinks />;
     return (
-        <nav className = "nav-wrapper indigo darken-4">
+        <nav className = "nav-wrapper indigo darken-4 z-depth-4">
             <div className = "container">
                 <Link to='/' className = "brand-logo">Contrats Papel</Link>
                 { links }

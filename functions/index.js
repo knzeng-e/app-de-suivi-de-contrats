@@ -2,8 +2,8 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const nodemailer = require('nodemailer');
 
-const SENDER_EMAIL = '' //Email of th sender here;
-const SENDER_PASSWORD = '' //Password of th sender here;
+const SENDER_EMAIL = 'thot.nzeng@gmail.com' //Email of the sender here;
+const SENDER_PASSWORD = 'Gabnzk8902a' //Password of the sender here;
 
 admin.initializeApp(functions.config().firebase);
 

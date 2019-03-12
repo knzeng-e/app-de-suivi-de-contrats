@@ -11,9 +11,15 @@ const contractReducer = (state = initState, action) => {
         case 'CREATE_CONTRACT':
             console.log('Created contract', action.contract);
             return state;
-        case 'CREATE_PROJECT_ERROR':
-            console.log('create projet error: ', action.err);
+
+        case 'CREATE_CONTRACT_ERROR':
+            console.log('create contract error: ', action.err);
             return state;
+
+        case 'DELETE_CONTRACT':
+            console.log('Contract deleted!', action.contract);
+            return state;
+            
         default: 
             return state;
     }

@@ -1,3 +1,6 @@
+import { Redirect } from 'react-router-dom';
+import React from 'react';
+
 export const createContract = (contract) => {
     return (
         (dispatch, getState, { getFirebase, getFirestore }) => {
@@ -18,6 +21,36 @@ export const createContract = (contract) => {
             }).catch((err) => {
                 dispatch({ type: 'CREATE_CONTRACT_ERROR', err});
             })
+        }
+    );
+}
+
+
+export const backHome = () => {
+    return <Redirect to = '/'/>
+}
+export const deleteContract = (id) => {
+    //console.log(contract)
+    const del = window.confirm('Voulez-vous supprimer le contract \"' + id + '\" ?');
+    
+    return (
+
+            (dispatch, getState, { getFirebase, getFirestore }) => {
+            //make async call to database
+            const firestore = getFirestore();
+            if (del){
+                firestore.collection('contracts').doc(id).delete().then(() => {
+    console.log("CONTRAT SUPPRIME");
+    backHome();
+    //Redirection vers la home à gérer avec push
+          
+                })
+            }
+          /* firestore.collection('contracts').doc(contract.id).delete().then(() => {
+                dispatch({ type: 'DELETE_CONTRACT', contract: contract});
+            }).catch((err) => {
+                dispatch({ type: 'DELETE_CONTRACT_ERROR', err});
+            })//*/
         }
     );
 }
