@@ -3,8 +3,11 @@ import { connect } from 'react-redux';
 import { createContract } from '../../store/actions/contractActions';
 import { Redirect } from 'react-router-dom';
 import DatePicker from 'react-date-picker';
+import moment from 'moment';
+import 'moment/locale/fr'
 
 class CreateContract extends Component {
+  
     state = {
         title: '',
         content: '',
@@ -25,23 +28,39 @@ class CreateContract extends Component {
           });
     }
 
+    setColor = (date, firstRemind, secondRemind) => {
+      if (moment().isSameOrAfter(date))
+        return 'black'
+      if (moment(date).isBefore(firstRemind))
+        return 'green'
+      if (moment(date).isBetween(firstRemind, secondRemind))
+        return 'orange'
+      if (moment(date).isSameOrAfter(secondRemind))
+        return 'red'
+
+    }
+
     handleDate = (date) => {
-      const saveDate = new Date(date);
-      const firstRemind = new Date(date);
-      const secondRemind = new Date(date);
-      const second = secondRemind.getDate() - 90;
-      const first = firstRemind.getDate() - 180;
-      firstRemind.setDate(first);
-      secondRemind.setDate(second);
+      
+      console.log('DATE!!!! ===> ', moment.locale())
+      const saveDate = moment(date);
+      const firstRemind = moment(date).subtract(6, 'months');
+      const secondRemind = moment(date).subtract(3, 'months');
+      const color = this.setColor(saveDate);
+      //const second = secondRemind.getDate() - 90;
+      //const first = firstRemind.getDate() - 180;
+      //firstRemind.setDate(first);
+      //secondRemind.setDate(second);
       this.setState({
-        endDate: saveDate, 
-        validity : saveDate.toLocaleDateString(),
-        firstNotif: firstRemind.toLocaleDateString(),
-        secondNotif: secondRemind.toLocaleDateString()
+        endDate: date, 
+        validity : saveDate.format('L'),
+        firstNotif: firstRemind.format('L'),
+        secondNotif: secondRemind.format('L'),
+        colorStatus : this.setColor(saveDate, firstRemind, secondRemind)
        });
 
-       console.log ('Dans 3 mois ==> ', secondRemind.toLocaleDateString());
-       console.log('Dans 6 mois ==> ', firstRemind.toLocaleDateString());
+       console.log ('Dans 3 mois ==> ', secondRemind);
+       console.log('Dans 6 mois ==> ', firstRemind);
     }
 
     handleSubmit = (e) => {
@@ -52,6 +71,7 @@ class CreateContract extends Component {
 
     
   render() {
+    console.log('LOCAL STATE ==> ', this.state)
     const { auth } = this.props;
 
     if (!auth.uid) return <Redirect to = '/signin' />;

@@ -26,10 +26,11 @@ export const createContract = (contract) => {
 }
 
 
-export const backHome = () => {
-    return <Redirect to = '/'/>
+export const backHome = (props) => {
+    props.history.push('/');
+    console.log('PROPS ====> ', props)
 }
-export const deleteContract = (id) => {
+export const deleteContract = (id, props) => {
     //console.log(contract)
     const del = window.confirm('Voulez-vous supprimer le contract \"' + id + '\" ?');
     
@@ -41,7 +42,7 @@ export const deleteContract = (id) => {
             if (del){
                 firestore.collection('contracts').doc(id).delete().then(() => {
     console.log("CONTRAT SUPPRIME");
-    backHome();
+    backHome(props);
     //Redirection vers la home à gérer avec push
           
                 })

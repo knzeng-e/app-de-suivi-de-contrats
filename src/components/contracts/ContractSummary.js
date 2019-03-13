@@ -11,21 +11,20 @@ const ContractSummary = ({contract, contract_id}) => {
     let badge_caption;
     const looking = () => {
         
+        badge_caption = dateTab;
+
          if (contract.colorStatus === 'green'){
             //badge_caption = '[ + de 6 mois ]';
-            badge_caption = dateTab ;
             return "new badge green darken-2 z-depth-4";
          }
             //return "card green darken-2 z-depth-4 contract-summary";
         if (contract.colorStatus === 'orange') {
             //badge_caption = '[ - de 6 mois ]';
-            badge_caption = dateTab ;
             return "new badge orange darken-1 z-depth-4";
         }
             //return "card orange darken-2 z-depth-4 contract-summary";
         if (contract.colorStatus === 'red') {
             //badge_caption = '[ - de 3 mois ]';
-            badge_caption = dateTab ;
             return "new badge red darken-4 z-depth-4";
         }
             //return "card red darken-4 z-depth-4 contract-summary";

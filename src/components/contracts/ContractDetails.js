@@ -8,7 +8,6 @@ import { Redirect } from 'react-router-dom';
 import moment from 'moment';
 
 function ContractDetails(props) {
-console.log('params : ', props.match.params)
   //const id = props.match.params.id;
   const { contract, auth, deleteContract, id } = props;
   //const current_time = moment(contract.createdAt.toDate()).calendar();
@@ -30,12 +29,9 @@ console.log('params : ', props.match.params)
             <div>Fin de validité : {contract.validity}</div>
             
           <span>
-           <button className = "btn left" href="#"><i className="material-icons">mode_edit</i></button>
-           <button className = "btn right red lighten-1" onClick={() => deleteContract(id)}><i className="material-icons">delete</i></button>
+           < button className = "btn left" href="#"><i className="material-icons">mode_edit</i></button>
+           <button className = "btn right red lighten-1" onClick={() => deleteContract(id, props)}><i className="material-icons">delete</i></button>
           </span>
-
-
-
             <div>Enregistré par {contract.authorFistName} {contract.authorLastName}</div>
             <div>{moment(contract.createdAt.toDate()).calendar()}</div>
             
@@ -68,7 +64,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteContract : (id) => dispatch(deleteContract(id))
+    deleteContract : (id, props) => dispatch(deleteContract(id, props)),
   }
 }
 
