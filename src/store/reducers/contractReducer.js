@@ -1,9 +1,5 @@
 const initState = {
-    contracts: [
-        {id: '1', title: 'Contrat forestier Nkok', content: 'Ceci est un contrat établit entre Nkok et Papel_society'},
-        {id: '2', title: 'Contrat Pétrolier Perinco', content: 'Ceci est un contrat établit entre Perinco et Papel_society'},
-        {id: '3', title: 'Contrat Maritime Bolloré', content: 'Ceci est un contract établit entre Bolloré et Papel_soicety'}
-    ]
+    contracts: []
 };
 
 const contractReducer = (state = initState, action) => {
@@ -18,6 +14,10 @@ const contractReducer = (state = initState, action) => {
 
         case 'DELETE_CONTRACT':
             console.log('Contract deleted!', action.contract);
+            return state;
+
+        case 'MODIFY_CONTRACT':
+            console.log('Contract modified!!', action.contract);
             return state;
             
         default: 

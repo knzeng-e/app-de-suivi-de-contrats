@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import { deleteContract } from '../../store/actions/contractActions';
+import { deleteContract, modifyContract } from '../../store/actions/contractActions';
 import { compose } from 'redux';
 import { firestore } from 'firebase';
 import { Redirect } from 'react-router-dom';
@@ -9,7 +9,7 @@ import moment from 'moment';
 
 function ContractDetails(props) {
   //const id = props.match.params.id;
-  const { contract, auth, deleteContract, id } = props;
+  const { contract, auth, deleteContract, modifyContract, id } = props;
   //const current_time = moment(contract.createdAt.toDate()).calendar();
 
   if (contract) {
@@ -29,7 +29,6 @@ function ContractDetails(props) {
             <div>Fin de validité : {contract.validity}</div>
             
           <span>
-           < button className = "btn left" href="#"><i className="material-icons">mode_edit</i></button>
            <button className = "btn right red lighten-1" onClick={() => deleteContract(id, props)}><i className="material-icons">delete</i></button>
           </span>
             <div>Enregistré par {contract.authorFistName} {contract.authorLastName}</div>
@@ -65,6 +64,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteContract : (id, props) => dispatch(deleteContract(id, props)),
+    modifyContract : (id, props) => dispatch(modifyContract(id, props))
   }
 }
 

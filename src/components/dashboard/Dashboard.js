@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Notifications from './Notifications';
+//import Notifications from './Notifications';
 import ContractList from './../contracts/ContractList';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';

@@ -6,7 +6,7 @@ import 'firebase/auth';
 //Initialize firebase
 
 var config = {
-    apiKey: "AIzaSyCM5G3331ZnSmZ8LGsZsayORxVypJXlXF4", //YOUR API_KEY HERE
+    apiKey: "", //YOUR API_KEY HERE
     authDomain: "sage-papel-suivi-de-contrats.firebaseapp.com",
     databaseURL: "https://sage-papel-suivi-de-contrats.firebaseio.com",
     projectId: "sage-papel-suivi-de-contrats",
