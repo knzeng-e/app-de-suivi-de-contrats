@@ -20,13 +20,13 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-const mailOptions = {
+const mailOptions = 
+{
     from : '"Coucouya via Contrats_Papel" <thot.nzeng@gmail.com>',
-    to: 'kevin.nzeng@gmail.com',
+    to: 'vamassounga@ga.perenco.com',
     subject : '',
     text: '',
     html: ''
-
 };
 
 const end_of_contract = (mailOptions, contract) => {
