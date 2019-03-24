@@ -36,10 +36,10 @@ const ContractSummary = ({contract, contract_id}) => {
     }
     
     return (
-    <ul className="collapsible">
+    <ul className="collapsible contract_list">
         <li>
             <Link to = {'/contract/' +  contract_id}>
-                <div className="collapsible-header hoverable">
+                <div className="contract_list collapsible-header hoverable">
                   <i className="material-icons">layers</i>
                     {contract.title}
                     <span className = {looking()} data-badge-caption= {badge_caption}></span>

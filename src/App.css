@@ -18,6 +18,10 @@
   color: white;
 }
 
+.form_style {
+  border-radius: 50%;
+}
+
 .App-link {
   color: #61dafb;
 }

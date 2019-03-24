@@ -1,4 +1,4 @@
-body {
+body{
   background-image: url('https://cdn.pixabay.com/photo/2018/04/29/01/15/coast-3358820_960_720.jpg');
   background-repeat: no-repeat;
   background-size: 100%; 
@@ -14,4 +14,25 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+body form {
+  border-radius: 42px;
+  padding: 25px;
+  margin-top: 21px;
+}
+
+body .myDiv {
+  padding : 21px;
+  margin-top: 12px;
+  border-radius: 21px;
+}
+
+.contract_list {
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+}
+
+.calendar {
+  padding-left: 1rem;
 }

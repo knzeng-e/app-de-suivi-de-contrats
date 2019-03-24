@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { deleteContract, modifyContract } from '../../store/actions/contractActions';
 import { compose } from 'redux';
-import { firestore } from 'firebase';
 import { Redirect } from 'react-router-dom';
 import moment from 'moment';
 

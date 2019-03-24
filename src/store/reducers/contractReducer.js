@@ -18,7 +18,10 @@ const contractReducer = (state = initState, action) => {
 
         case 'MODIFY_CONTRACT':
             console.log('Contract modified!!', action.contract);
-            return state;
+            console.log('Contenu Local: ====> ', action.state.contract.content)
+            return {
+                ...state,
+            };
             
         default: 
             return state;

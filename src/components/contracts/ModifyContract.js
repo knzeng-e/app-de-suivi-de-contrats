@@ -25,7 +25,6 @@ class ModifyContract extends Component {
         return 'orange'
       if (moment().isSameOrAfter(secondRemind))
         return 'red'
-
     }
 
     handleDate = (date) => {
@@ -37,11 +36,7 @@ class ModifyContract extends Component {
 
       console.log('FIRST REMIND ==> ', firstRemind.format('L'));
       console.log('SECOND_REMIND  ==> ', secondRemind.format('L'))
-      //const color = this.setColor(saveDate);
-      //const second = secondRemind.getDate() - 90;
-      //const first = firstRemind.getDate() - 180;
-      //firstRemind.setDate(first);
-      //secondRemind.setDate(second);
+     
       this.setState({
         endDate: date, 
         validity : saveDate.format('L'),
@@ -62,7 +57,7 @@ class ModifyContract extends Component {
 
     
   render() {
-    console.log('LOCAL STATE ==> ', this.state)
+    
     const { auth, contract, id } = this.props;
 
     if (!auth.uid) return <Redirect to = '/signin' />;
@@ -74,7 +69,7 @@ class ModifyContract extends Component {
             <br/>
             <div className = "input-field grey-text z-depth-0 center">
                 <label htmlFor = "title">Nom du contract</label>
-                <input required type="text" id = "title" value = {this.props.title} onChange = {this.handleChange}/>
+                <input required type="text" id = "title" value = {this.props.content} onChange = {this.handleChange}/>
             </div>
             <div className = "input-field grey-text z-depth-0 center">
                 <label htmlFor = "content">Descriptif du contrat</label>
@@ -102,8 +97,8 @@ const mapStateToProps = (state, ownProps) => {
     const id = ownProps.match.params.id;
   return {
     auth: state.firebase.auth,
-    //contract: state.firestore.data.contracts[id]
-    id: id
+    //contract: state.firestore.data.contracts.filter(doc => doc.id === id),
+    id: id,
   }
 }
 

@@ -59,12 +59,18 @@ export const modifyContract = (id, props) => {
             (dispatch, getState, { getFirebase, getFirestore }) => {
             //make async call to database
             const firestore = getFirestore();
+            const myContract = firestore.collection('contracts').doc(id);
+            const content = props.contract.content;
+
+            console.log('\nContrat à modifier ==> ', myContract);
+            console.log('STATE_To_PROPS ==> ', props)
             props.history.push('/modify/'+id);
-            firestore.collection('contracts').doc(id).update({
+            
+            myContract.update({
 
             }).then((res) => {
                 console.log("CONTRAT Modifié ==> ", res);
-                dispatch({type: 'MODIFY_CONTRACT', contract: id})
+                dispatch({type: 'MODIFY_CONTRACT', contract: id, state: props})
                // props.history.push('/contract/'+id);
     //backHome(props);
     //Redirection vers la home à gérer avec push
